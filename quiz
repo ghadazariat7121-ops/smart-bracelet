@@ -392,7 +392,7 @@
                 }
             }
 
-            // Afficher le score
+           
             const scoreDisplay = document.getElementById("scoreDisplay");
             const percentage = (score / totalQuestions) * 100;
             
@@ -414,7 +414,7 @@
             scoreDisplay.className = `score ${scoreClass}`;
             scoreDisplay.style.display = "block";
 
-            // Désactiver les radios après correction
+        
             const allRadios = document.querySelectorAll('input[type="radio"]');
             allRadios.forEach(radio => {
                 radio.disabled = true;
@@ -422,21 +422,21 @@
         }
 
         function resetQuiz() {
-            // Réinitialiser tous les radios
+           
             const allRadios = document.querySelectorAll('input[type="radio"]');
             allRadios.forEach(radio => {
                 radio.checked = false;
                 radio.disabled = false;
             });
 
-            // Cacher toutes les réponses
+         
             const allAnswers = document.querySelectorAll('.correct-answer');
             allAnswers.forEach(answer => {
                 answer.style.display = "none";
                 answer.innerHTML = "";
             });
 
-            // Cacher le score
+            
             const scoreDisplay = document.getElementById("scoreDisplay");
             scoreDisplay.style.display = "none";
         }
