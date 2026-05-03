@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBracelet - Dashboard</title>
+    <link rel="stylesheet" href="adminpanel.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+<aside class="sidebar">
+            <div class="brand">SmartBracelet</div>
+            
+            <div class="admin-box">
+                <div class="admin-icon"><i class="ph-fill ph-shield-check"></i></div>
+                <div class="admin-info">
+                    <div class="admin-title">Admin Panel</div>
+                    <div class="admin-subtitle">HEALTH MONITOR</div>
+                </div>
+            </div>
+
+            <nav class="menu">
+                <a href="adminpanel.html" style="text-decoration: none; color: inherit;">
+                    <div class="menu-item active"><i class="ph ph-squares-four"></i> Dashboard</div>
+                </a>
+
+                <a href="gestionemployes.html" style="text-decoration: none; color: inherit;">
+                    <div class="menu-item"><i class="ph ph-devices"></i> Device Management</div>
+                </a>
+
+                <a href="alerts.html" style="text-decoration: none; color: inherit;">
+                    <div class="menu-item"><i class="ph ph-warning"></i> Alerts</div>
+                </a>
+                
+                <a href="quiz.html" style="text-decoration: none; color: inherit;">
+                    <div class="menu-item"><i class="ph ph-heartbeat"></i> Quiz</div>
+                </a>
+
+                <div class="menu-item"><i class="ph ph-file-text"></i> Reports</div>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="support-link"><i class="ph ph-question"></i> Support</div>
+            </div>
+        </aside>
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="system-status">
+                    <span class="brand-text">SmartBracelet</span>
+                    <span class="status-pill"><span class="dot"></span> LIVE SYSTEM</span>
+                </div>
+                <div class="user-profile">
+                    <i data-lucide="bell" class="icon"></i>
+                    <i data-lucide="settings" class="icon"></i>
+                    <div class="profile-details">
+                        <span class="name">Admin Profile</span>
+                        <span class="role">System Controller</span>
+                    </div>
+                    <img src="https://via.placeholder.com/40" class="avatar" alt="Admin">
+                </div>
+            </header>
+
+            <section class="kpi-grid">
+                <div class="kpi-card">
+                    <span class="label">EMPLOYÉS TOTAUX</span>
+                    <div class="value">2005</div>
+                    <span class="trend up">+12% vs mois dernier</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="label">HEURES CE MOIS</span>
+                    <div class="value">18,540</div>
+                    <span class="trend blue">98% Objectif atteint</span>
+                </div>
+                <div class="kpi-card alert-kpi">
+                    <span class="label">ALERTES ACTIVES</span>
+                    <div class="value">03</div>
+                    <span class="trend red">! Nécessite attention</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="label">BPM MOYEN</span>
+                    <div class="value">72</div>
+                    <span class="trend pink">♥ Stabilité : Optimale</span>
+                </div>
+            </section>
+
+            <div class="middle-grid">
+                <section class="chart-container">
+                    <div class="chart-header">
+                        <h3>Moyenne Heures Travaillées</h3>
+                        <div class="filters">
+                            <span>24h</span>
+                            <span class="active">7j</span>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="workingHoursChart"></canvas>
+                    </div>
+                </section>
+
+                <aside class="alerts-sidebar">
+                    <h3>Alertes Santé</h3>
+                    <div class="alert-box red">
+                        <i data-lucide="zap"></i>
+                        <div>
+                            <strong>Tachycardie détectée</strong>
+                            <p>Ghada zariat • Zone 4B</p>
+                            <span class="tag">DANGER CRITIQUE</span>
+                        </div>
+                    </div>
+                    <div class="alert-box purple">
+                        <i data-lucide="thermometer"></i>
+                        <div>
+                            <strong>Température élevée</strong>
+                            <p>mariem benslimen • Entrepôt</p>
+                            <span class="tag">ATTENTION MODÉRÉE</span>
+                        </div>
+                    </div>
+                    <div class="alerts-footer">
+                        <a href="alerts.html" class="btn-see-more">
+                            Voir plus <i class="ph ph-arrow-right"></i>
+                        </a>
+                    </div>
+                </aside>
+            </div>
+
+            <section class="bottom-grid">
+                <div class="employee-card">
+                    <div class="emp-header">EMPLOYÉ DU MOIS</div>
+                    <img src="https://via.placeholder.com/60" class="emp-avatar" alt="Emp">
+                    <h4>Thomas Bernard</h4>
+                    <p>168 heures actives • Score: 98/100</p>
+                    <div class="emp-stats">
+                        <div class="chip">PROD +24%</div>
+                        <div class="chip">Elite</div>
+                    </div>
+                </div>
+
+                <div class="rankings-card">
+                    <h3>Top Heures</h3>
+                    <div class="ranking-item">
+                        <div class="rank-info">
+                            <span class="rank-number">02</span>
+                            <div class="rank-avatar">PD</div>
+                            <div>
+                                <span class="rank-name">Pierre Durand</span>
+                                <span class="rank-val">162.5 hrs</span>
+                            </div>
+                        </div>
+                        <i class="ph ph-trend-up trend-icon"></i>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="rank-info">
+                            <span class="rank-number">03</span>
+                            <div class="rank-avatar">SM</div>
+                            <div>
+                                <span class="rank-name">Sarah </span>
+                                <span class="rank-val">158.2 hrs</span>
+                            </div>
+                        </div>
+                        <i class="ph ph-minus trend-icon"></i>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
