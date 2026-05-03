@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBracelet - Device Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <div class="app-wrapper">
+        <aside class="sidebar">
+            <div class="brand">SmartBracelet</div>
+            
+            <div class="admin-box">
+                <div class="admin-icon"><i class="ph-fill ph-shield-check"></i></div>
+                <div>
+                    <div class="admin-title">Admin Panel</div>
+                    <div class="admin-subtitle">HEALTH MONITOR</div>
+                </div>
+            </div>
+
+            <nav class="menu">
+                <div class="menu-item"><i class="ph ph-squares-four"></i> Dashboard</div>
+                <div class="menu-item"><i class="ph ph-heartbeat"></i> Health Metrics</div>
+                <div class="menu-item active"><i class="ph ph-devices"></i> Device Management</div>
+                <div class="menu-item"><i class="ph ph-warning"></i> Alerts</div>
+                <div class="menu-item"><i class="ph ph-file-text"></i> Reports</div>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <button class="btn-emergency">
+                    <i class="ph-fill ph-sun"></i> EMERGENCY RESPONSE
+                </button>
+                <div class="support-link"><i class="ph ph-question"></i> Support</div>
+            </div>
+            
+        </aside>
+
+        <main class="main-content">
+            <header class="top-nav">
+                <div class="search-bar">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input type="text" placeholder="Rechercher...">
+                </div>
+                <div class="top-actions">
+                    <i class="ph ph-bell"></i>
+                    <i class="ph ph-gear"></i>
+                    <img src="https://i.pravatar.cc/100?u=admin" class="avatar-small">
+                </div>
+            </header>
+
+            <section class="page-header">
+                <div>
+                    <h1>Gestion des Employés</h1>
+                    <p>Gérez les accès et surveillez les indicateurs de santé du personnel connecté.</p>
+                </div>
+                <button class="btn-add">
+                    <i class="ph ph-user-plus"></i> Ajouter un employé
+                </button>
+            </section>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-row">
+                        <i class="ph ph-users-three text-blue"></i>
+                        <span class="trend-pos">+4%</span>
+                    </div>
+                    <div class="stat-number">124</div>
+                    <div class="stat-label">TOTAL EMPLOYÉS</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-row">
+                        <i class="ph ph-heart-straight-fill text-green"></i>
+                        <span class="trend-neutral">Normal</span>
+                    </div>
+                    <div class="stat-number">118</div>
+                    <div class="stat-label">STATUT OPTIMAL</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-row">
+                        <i class="ph ph-warning-octagon text-yellow"></i>
+                        <span class="trend-warn">Attention</span>
+                    </div>
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">SUIVI REQUIS</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-row">
+                        <i class="ph ph-prohibit text-red"></i>
+                        <span class="trend-alert">Alerte</span>
+                    </div>
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">ALERTES ACTIVES</div>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <div class="table-filters">
+                    <div class="inner-search">
+                        <i class="ph ph-magnifying-glass"></i>
+                        <input type="text" placeholder="Filtrer par nom, poste ou identifiant...">
+                    </div>
+                    <div class="filter-btns">
+                        <button class="btn-outline"><i class="ph ph-funnel"></i> Filtres</button>
+                        <button class="btn-outline"><i class="ph ph-export"></i> Exporter</button>
+                    </div>
+                </div>
+
+                <table class="employee-table">
+                    <thead>
+                        <tr>
+                            <th>EMPLOYÉ</th>
+                            <th>POSTE</th>
+                            <th>RÔLE</th>
+                            <th>SANTÉ</th>
+                            <th style="text-align: right;">ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="user-info">
+                                    <img src="https://i.pravatar.cc/150?u=1" class="avatar">
+                                    <div>
+                                        <strong>Thomas Leroy</strong>
+                                        <span>ID: #SB-2901</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Ingénieur Réseau</td>
+                            <td><span class="badge-role">UTILISATEUR</span></td>
+                            <td><span class="status-pill status-ok">OPTIMAL</span></td>
+                            <td class="action-icons">
+                                <i class="ph ph-pencil-simple"></i>
+                                <i class="ph ph-trash"></i>
+                            </td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

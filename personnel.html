@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBracelet - Personnel Panel</title>
+    <link rel="stylesheet" href="personnel.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <header class="header-card">
+            <div class="user-profile">
+                <img src="https://via.placeholder.com/150" alt="Avatar" class="avatar">
+                <div class="user-info">
+                    <h2 style="color: #1a1a2e;">Jean Dupont <span class="badge-active">ACTIF</span></h2>
+                    <p style="color: var(--text-dim); font-size: 0.9rem;">Opérateur de Maintenance Senior</p>
+                </div>
+            </div>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </button>
+                <button class="btn btn-primary" onclick="showWeeklyReport()">
+                    <i class="fas fa-file-alt"></i> Rapport Complet
+                </button>
+            </div>
+        </header>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <h3><i class="fas fa-heartbeat" style="color: #ef4444;"></i> BPM</h3>
+                <div class="stat-value">72</div>
+            </div>
+            <div class="stat-card">
+                <h3><i class="fas fa-wind" style="color: #00b894;"></i> SpO2</h3>
+                <div class="stat-value">98<small>%</small></div>
+            </div>
+            <div class="stat-card">
+                <h3><i class="fas fa-thermometer-half" style="color: #667eea;"></i> Température</h3>
+                <div class="stat-value">36.7<small>°C</small></div>
+            </div>
+        </section>
+
+        <section class="main-chart-card">
+            <h3>Évolution des Constantes (24h)</h3>
+            <div style="height: 350px;"><canvas id="healthChart"></canvas></div>
+        </section>
+
+        <div class="bottom-grid">
+            <div class="stat-card">
+                <h3>Heures Travaillées / Semaine</h3>
+                <div style="height: 250px;"><canvas id="workChart"></canvas></div>
+            </div>
+            <div class="stat-card">
+                <h3><i class="fas fa-bell"></i> Journal des Alertes</h3>
+                <div style="margin-top:15px; color:var(--text-dim); font-style: italic;">
+                    <i class="fas fa-check-circle" style="color: var(--success);"></i> Aucune alerte critique ce mois-ci.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="color: #1a1a2e;">Historique de Présence</h2>
+                <button onclick="closeModal()" style="background:none; border:none; color:var(--text-dim); cursor:pointer; font-size: 1.5rem;">&times;</button>
+            </div>
+            <table class="report-table">
+                <thead>
+                    <tr><th>Mois</th><th>Total</th><th>Statut</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>janvier 2026</td><td>172h</td><td><span style="color: var(--success)">Validé</span></td></tr>
+                    <tr><td>fevrier 2026</td><td>172h</td><td><span style="color: var(--success)">Validé</span></td></tr>
+                    <tr><td>Mars 2026</td><td>172h</td><td><span style="color: var(--success)">Validé</span></td></tr>
+                    <tr><td>Avril 2024</td><td>160h</td><td><span style="color: var(--accent-blue)">En cours</span></td></tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 30px; display: flex; gap: 10px;">
+                <button class="btn btn-primary" onclick="window.print()"><i class="fas fa-print"></i> PDF</button>
+                <button class="btn btn-logout" onclick="closeModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fonction de déconnexion (Nettoyage localStorage comme demandé précédemment)
+        function logout() {
+            if(confirm("Voulez-vous vraiment vous déconnecter ?")) {
+                localStorage.clear();
+                sessionStorage.clear();
+                window.location.href = 'login.html';
+            }
+        }
+
+        function showWeeklyReport() { document.getElementById('reportModal').style.display = "block"; }
+        function closeModal() { document.getElementById('reportModal').style.display = "none"; }
+        window.onclick = function(event) { if (event.target == document.getElementById('reportModal')) { closeModal(); } }
+
+        // Configuration Graphique Santé (3 courbes)
+        const healthCtx = document.getElementById('healthChart').getContext('2d');
+        new Chart(healthCtx, {
+            type: 'line',
+            data: {
+                labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '23:59'],
+                datasets: [
+                    {
+                        label: 'BPM',
+                        data: [72, 68, 110, 85, 92, 75, 70],
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'SpO2 (%)',
+                        data: [98, 98, 97, 99, 98, 98, 98],
+                        borderColor: '#00b894',
+                        tension: 0.4,
+                        fill: false
+                    },
+                    {
+                        label: 'Température (°C)',
+                        data: [36.6, 36.5, 36.8, 37.1, 36.9, 36.7, 36.6],
+                        borderColor: '#dc2626',
+                        tension: 0.4,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { usePointStyle: true, font: { family: 'Poppins' } } }
+                },
+                scales: {
+                    y: { grid: { color: '#f0f0f0' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Graphique Travail
+        const workCtx = document.getElementById('workChart').getContext('2d');
+        new Chart(workCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven'],
+                datasets: [{
+                    label: 'Heures',
+                    data: [8.5, 9.1, 8.0, 8.7, 7.5],
+                    backgroundColor: '#764ba2',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f0f0f0' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

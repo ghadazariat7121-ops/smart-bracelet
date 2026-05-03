@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBracelet - Gestion des Alertes</title>
+    <link rel="stylesheet" href="alerts.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-wrapper">
+       <aside class="sidebar">
+    <div class="brand-section">
+        <div class="logo-box">SB</div>
+        <div class="brand-text">
+            <h2>Personal Panel</h2>
+            <p>Health Monitor</p>
+        </div>
+    </div>
+
+    <nav class="nav-container">
+        <ul class="nav-menu">
+            <li class="nav-item active">
+                <i data-lucide="layout-grid"></i>
+                <span>Dashboard</span>
+            </li>
+            <li class="nav-item">
+                <i data-lucide="activity"></i>
+                <span>Health Metrics</span>
+            </li>
+            <li class="nav-item">
+                <i data-lucide="bell"></i>
+                <span>Alerts</span>
+                <span class="alert-badge">3</span>
+            </li>
+            <li class="nav-item">
+                <i data-lucide="watch"></i>
+                <span>Device Management</span>
+            </li>
+            <li class="nav-item">
+                <i data-lucide="file-bar-chart"></i>
+                <span>Reports</span>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="emergency-action">
+        <i data-lucide="shield-alert"></i>
+        <span>Emergency Response</span>
+    </div>
+</aside>
+
+        <main class="content">
+            <header class="header">
+                <h1>Journal des Alertes</h1>
+                <div class="filter-bar">
+                    <button class="filter-btn active">Toutes</button>
+                    <button class="filter-btn">Critiques</button>
+                    <button class="filter-btn">Actives</button>
+                    <button class="filter-btn">Archives</button>
+                </div>
+            </header>
+
+            <section class="alert-list">
+                <div class="alert-card critical">
+                    <div class="alert-icon"><i data-lucide="alert-octagon"></i></div>
+                    <div class="alert-info">
+                        <div class="alert-top">
+                            <span class="type">TACHYCARDIE DÉTECTÉE</span>
+                            <span class="time">Il y a 2 min</span>
+                        </div>
+                        <h3>Jean Dupont (ID: #98234)</h3>
+                        <p>Fréquence cardiaque à 124 BPM. Localisation : Secteur A4 - Niveau 2.</p>
+                        <div class="alert-footer">
+                            <span class="badge">DANGER IMMÉDIAT</span>
+                            <div class="actions">
+                                <button class="btn btn-call">Appeler</button>
+                                <button class="btn btn-resolve">Résoudre</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert-card warning">
+                    <div class="alert-icon"><i data-lucide="thermometer"></i></div>
+                    <div class="alert-info">
+                        <div class="alert-top">
+                            <span class="type">TEMPÉRATURE ÉLEVÉE</span>
+                            <span class="time">Il y a 15 min</span>
+                        </div>
+                        <h3>Marc Lefebvre (ID: #88412)</h3>
+                        <p>Température corporelle : 38.9°C. État stable mais à surveiller.</p>
+                        <div class="alert-footer">
+                            <span class="badge">ATTENTION</span>
+                            <div class="actions">
+                                <button class="btn btn-resolve">Ignorer</button>
+                                <button class="btn btn-resolve">Check-up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert-card info">
+                    <div class="alert-icon"><i data-lucide="wifi-off"></i></div>
+                    <div class="alert-info">
+                        <div class="alert-top">
+                            <span class="type">SIGNAL PERDU</span>
+                            <span class="time">Il y a 1h</span>
+                        </div>
+                        <h3>Sophie Martin (ID: #77521)</h3>
+                        <p>Le bracelet ne transmet plus de données. Dernière position : Zone de Stockage.</p>
+                        <div class="alert-footer">
+                            <span class="badge">SYSTÈME</span>
+                            <div class="actions">
+                                <button class="btn btn-resolve">Réessayer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
