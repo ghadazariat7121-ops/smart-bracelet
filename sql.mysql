@@ -1,0 +1,61 @@
+CREATE DATABASE smart_bracelet;
+USE smart_bracelet;
+
+CREATE TABLE employes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(100) NOT NULL,
+    prenom VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    mot_de_passe VARCHAR(255) NOT NULL,
+    role ENUM('admin', 'employe') DEFAULT 'employe',
+    badge_id VARCHAR(50),
+    department VARCHAR(100),
+    date_inscription DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE pointages (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    employe_id INT,
+    date DATE NOT NULL,
+    check_in TIME,
+    check_out TIME,
+    heures DECIMAL(5,2) GENERATED ALWAYS AS (TIMESTAMPDIFF(HOUR, check_in, check_out)) STORED,
+    FOREIGN KEY (employe_id) REFERENCES employes(id) ON DELETE CASCADE
+);
+
+CREATE TABLE sante_data (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    employe_id INT,
+    heart_rate INT,
+    temperature DECIMAL(4,2),
+    spO2 INT,
+    recorded_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (employe_id) REFERENCES employes(id) ON DELETE CASCADE
+);
+
+CREATE TABLE alertes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    employe_id INT,
+    alert_type ENUM('high_heart_rate', 'fever', 'low_spo2', 'signal_perdu') NOT NULL,
+    alert_message TEXT,
+    niveau ENUM('critical', 'warning', 'info') DEFAULT 'warning',
+    resolu BOOLEAN DEFAULT FALSE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (employe_id) REFERENCES employes(id) ON DELETE CASCADE
+);
+
+-- Exemples
+INSERT INTO employes (nom, prenom, email, mot_de_passe, role, department) VALUES
+('bentorkia', 'ilef', 'ilef@icloud.com', 'hohola', 'employe', 'Maintenance'),
+('Admin', 'System', 'admin@smartbracelet.com', 'lalalbaba', 'admin', 'IOT');
+
+
+INSERT INTO pointages (employe_id, date, check_in, check_out) VALUES
+(1, CURDATE(), '08:30:00', '17:00:00');
+
+INSERT INTO sante_data (employe_id, heart_rate, temperature, spO2) VALUES
+(1, 72, 36.7, 98),
+(1, 110, 37.2, 97);
+
+INSERT INTO alertes (employe_id, alert_type, alert_message, niveau) VALUES
+(1, 'high_heart_rate', 'Fréquence cardiaque élevée : 124 BPM', 'critical');
